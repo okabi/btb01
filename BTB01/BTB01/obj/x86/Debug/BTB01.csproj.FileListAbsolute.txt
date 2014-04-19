@@ -1,0 +1,6 @@
+C:\Users\okabi\documents\visual studio 2010\Projects\BTB01\BTB01\bin\Debug\BTB01.exe
+C:\Users\okabi\documents\visual studio 2010\Projects\BTB01\BTB01\bin\Debug\BTB01.pdb
+C:\Users\okabi\documents\visual studio 2010\Projects\BTB01\BTB01\obj\x86\Debug\BTB01.exe
+C:\Users\okabi\documents\visual studio 2010\Projects\BTB01\BTB01\obj\x86\Debug\BTB01.pdb
+C:\Users\okabi\Desktop\BTB\btb01\BTB01\BTB01\obj\x86\Debug\BTB01.exe
+C:\Users\okabi\Desktop\BTB\btb01\BTB01\BTB01\obj\x86\Debug\BTB01.pdb
