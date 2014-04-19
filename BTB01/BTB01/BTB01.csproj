@@ -38,8 +38,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DxLib\DxDLL.cs" />
+    <Compile Include="System\Character.cs" />
+    <Compile Include="System\Generic.cs" />
     <Compile Include="System\Main.cs" />
     <Compile Include="System\Transition.cs" />
+    <Compile Include="System\UI.cs" />
+    <Compile Include="System\Object.cs" />
+    <Compile Include="System\Control.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scenes\Stages\" />

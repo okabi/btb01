@@ -1,8 +1,12 @@
 ﻿/*
  * Main.cs
- *   このクラスは、メイン制御を定義します。
- *   実際に呼び出されるのはこのMain.Main()関数です。
- *   
+ *   概要
+ *     このクラスは、メイン制御を定義します。
+ *     アプリケーション実行時、実際に呼び出されるのはmain.Main()関数です。
+ *   このクラスを呼び出すファイル
+ *     
+ *   このクラスが呼び出すファイル
+ *     System/Transition.cs
  */
 
 using System;
@@ -26,7 +30,9 @@ namespace BTB01.System
                 return;
             }
 
-            DX.DrawString(100, 200, "ちんこｗ", DX.GetColor(255, 255, 255));
+            Generic.CollisionSquare test = new Generic.CollisionSquare(new double[] { 1.0, 4.0 }, new double[] { 4.0, 3.0 });
+            String st = (test.x[0] * test.y[0]).ToString() + (test.x[1] * test.y[1]).ToString();
+            DX.DrawString(100, 200, st, DX.GetColor(255, 255, 255));
 
             // キー入力待ち
             DX.WaitKey();
