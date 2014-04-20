@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DxLibDLL;
+using BTB01.System.Generic;
 
 namespace BTB01.System
 {
@@ -30,7 +31,7 @@ namespace BTB01.System
                 return;
             }
 
-            Generic.CollisionSquare test = new Generic.CollisionSquare(new double[] { 1.0, 4.0 }, new double[] { 4.0, 3.0 });
+            Generic.CollisionSquare test = new Generic.CollisionSquare(new double[] { 1.0, 4.0 }, new double[] { 4.0, 3.0 }, collisionType.PLAYER);
             String st = (test.x[0] * test.y[0]).ToString() + (test.x[1] * test.y[1]).ToString();
             DX.DrawString(100, 200, st, DX.GetColor(255, 255, 255));
 

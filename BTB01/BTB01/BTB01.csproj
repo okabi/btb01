@@ -47,6 +47,7 @@
     <Compile Include="System\Control.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Scenes\Others\" />
     <Folder Include="Scenes\Stages\" />
   </ItemGroup>
   <ItemGroup>
