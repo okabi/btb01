@@ -95,6 +95,7 @@ namespace BTB01
          */ 
         static Input()
         {
+            data = new Dictionary<DeviceID, int[]>();
             data[DeviceID.PAD1] = new int[(int)PadButtonID.length];
             data[DeviceID.PAD2] = new int[(int)PadButtonID.length];
             data[DeviceID.PAD3] = new int[(int)PadButtonID.length];
@@ -195,14 +196,17 @@ namespace BTB01
       */
     public static class Graphic
     {
-        public static Dictionary<GraphicID, int> data { get; private set; }  // 画像データ(連想配列)
+        public static Dictionary<GraphicID, int[]> data { get; private set; }  // 画像データ(連想配列)
         
         /**
          * コンストラクタ
          */ 
         static Graphic()
         {
-            data[GraphicID.PLAYER] = DX.LoadGraph("player.png");
+            data = new Dictionary<GraphicID, int[]>();
+            data[GraphicID.PLAYER] = new int[1];
+            // ここから～～
+            data[GraphicID.PLAYER][0] = DX.LoadGraph("data/img/player0.png");
         }
     }
 
@@ -220,8 +224,10 @@ namespace BTB01
          */
         static Sound()
         {
-            bgm[BgmID.TEST] = DX.LoadSoundMem("test.wav");
-            sound_effect[SoundEffectID.TEST] = DX.LoadSoundMem("test.wav");
+            bgm = new Dictionary<BgmID, int>();
+            sound_effect = new Dictionary<SoundEffectID, int>();
+            // bgm[BgmID.TEST] = DX.LoadSoundMem("test.wav");
+            // sound_effect[SoundEffectID.TEST] = DX.LoadSoundMem("test.wav");
         }
     }
 

@@ -29,14 +29,21 @@ namespace BTB01
                 return;
             }
 
-            // テスト用
+            // ↓テスト用
             Transition.changeScene(Scene.GAME);
+            // ↑テスト用
 
-            // Transitionのメイン関数を呼ぶ
-            Transition.main();
+            do
+            {
+                // OSにメッセージを渡す
+                if (DX.ProcessMessage() == -1) break;
 
-            // キー入力待ち
-            DX.WaitKey();
+                // デバイスの入力を取得
+                Input.main();
+
+                // Transitionのメイン関数を呼ぶ
+                Transition.main();
+            } while (Input.data[DeviceID.KEY][DX.KEY_INPUT_LALT] == 0 || Input.data[DeviceID.KEY][DX.KEY_INPUT_F4] == 0);
 
             // DXライブラリの終了
             DX.DxLib_End();

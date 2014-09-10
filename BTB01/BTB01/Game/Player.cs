@@ -67,15 +67,15 @@ namespace BTB01.Game
             key[PlayerButtonID.SHOT] = DX.KEY_INPUT_X;
             key[PlayerButtonID.PAUSE] = DX.KEY_INPUT_ESCAPE;
             // ↑試験的にデバイス・ボタン割り当てを行う
-        }
-
-
-        /**
-         * Game.main()が呼び出す部分
-         */
-        public void main()
-        {
-            controlInGame();
+            // ↓プレイヤー特有の動作処理
+            Func<int> f = 
+                () =>
+                    {
+                        controlInGame();
+                        return 0;
+                    };
+            this.behavior = f;
+            // ↑プレイヤー特有の動作処理
         }
 
 
@@ -84,7 +84,37 @@ namespace BTB01.Game
          */
         private void controlInGame()
         {
-            // ここから書いてこーーー
+            // 入力デバイスからの入力を受け取る
+            inputWithController();
+
+            // 入力に応じてキャラを動かす
+            if (game_input[PlayerButtonID.UP] > 0) this.vel_y = -1.0;
+            else if (game_input[PlayerButtonID.DOWN] > 0) this.vel_y = 1.0;
+            else this.vel_y = 0.0;
+            if (game_input[PlayerButtonID.LEFT] > 0) this.vel_x = -1.0;
+            else if (game_input[PlayerButtonID.RIGHT] > 0) this.vel_x = 1.0;
+            else this.vel_x = 0.0;
         }
+
+
+        /**
+         * プレイヤー入力
+         */
+        private void inputWithController()
+        {
+            foreach (PlayerButtonID button in Enum.GetValues(typeof(PlayerButtonID)))
+            {
+                if (device != DeviceID.KEY)
+                {
+                    if (Input.data[device][(int)pad[button]] > 0 || (key_use == true && Input.data[DeviceID.KEY][key[button]] > 0)) game_input[button]++;
+                    else game_input[button] = 0;
+                }
+                else
+                {
+                    if (Input.data[DeviceID.KEY][key[button]] > 0) game_input[button]++;
+                    else game_input[button] = 0;
+                }
+            }
+        } 
     }
 }

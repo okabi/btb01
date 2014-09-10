@@ -23,6 +23,7 @@ namespace BTB01.Game
         protected double acc_x;  // 加速度
         protected double acc_y;  // |
         protected GraphicID graphic;  // 画像
+        protected int animation;  // 表示アニメーション番号(歩行アニメーションなど)
         protected double exRate;  // 拡縮率
         protected double angle;  // 回転角(ラジアン)
         protected Func<int> behavior;  // 毎フレーム実行する行動関数
@@ -39,13 +40,14 @@ namespace BTB01.Game
             acc_x = 0.0;
             acc_y = 0.0;
             this.graphic = graphic;
+            animation = 0;
             exRate = 1.0;
             angle = 0.0;
             Func<int> f = 
                 () => 
-                {
-                    return 0;
-                };
+                    {
+                        return 0;
+                    };
             this.behavior = f;
         }
 
@@ -68,7 +70,7 @@ namespace BTB01.Game
          */ 
         public void draw()
         {
-            DX.DrawRotaGraphF((float)pos_x, (float)pos_y, exRate, angle, Graphic.data[graphic], DX.FALSE);
+            DX.DrawRotaGraphF((float)pos_x, (float)pos_y, exRate, angle, Graphic.data[graphic][animation], DX.FALSE);
         }
     }
 }

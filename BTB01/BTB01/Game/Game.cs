@@ -54,9 +54,21 @@ namespace BTB01.Game
         /**
          * ゲーム内汎用インスタンスの宣言
          */
-        private static List<Character> character = new List<Character>();
+        private static List<Player> player = new List<Player>();
         private static List<Object> obj = new List<Object>();
         private static List<UI> ui = new List<UI>();
+
+
+        /**
+         * コンストラクタ
+         */
+        static Game()
+        {
+            // ↓テスト用
+            Player item = new Player(GraphicID.PLAYER, DeviceID.KEY);
+            player.Add(item);
+            // ↑テスト用
+        }
 
 
         // 四角形の当たり判定
@@ -123,11 +135,36 @@ namespace BTB01.Game
          */
         public static void main()
         {
+            // オブジェクト等の行動処理
+            move();
 
+            // オブジェクト等の描画処理
+            draw();
         }
 
 
+        /**
+         * オブジェクト等の行動処理
+         */
+        private static void move()
+        {
+            foreach (Player p in player)
+            {
+                p.move();
+            }
+        }
 
+
+        /**
+         * オブジェクト等の描画処理
+         */
+        private static void draw()
+        {
+            foreach (Player p in player)
+            {
+                p.draw();
+            }
+        }
 
 
         /**
