@@ -34,7 +34,7 @@ namespace BTB01
     }
 
     // 入力デバイス定数
-    public enum InputID
+    public enum DeviceID
     {
         PAD1 = DX.DX_INPUT_PAD1,
         PAD2 = DX.DX_INPUT_PAD2,
@@ -88,18 +88,18 @@ namespace BTB01
     public static class Input
     {
         // 各入力デバイスの各ボタンが押され続けたフレーム数
-        public static Dictionary<InputID, int[]> data { get; private set; }
+        public static Dictionary<DeviceID, int[]> data { get; private set; }
 
         /**
          * コンストラクタ
          */ 
         static Input()
         {
-            data[InputID.PAD1] = new int[(int)PadButtonID.length];
-            data[InputID.PAD2] = new int[(int)PadButtonID.length];
-            data[InputID.PAD3] = new int[(int)PadButtonID.length];
-            data[InputID.PAD4] = new int[(int)PadButtonID.length];
-            data[InputID.KEY] = new int[256];
+            data[DeviceID.PAD1] = new int[(int)PadButtonID.length];
+            data[DeviceID.PAD2] = new int[(int)PadButtonID.length];
+            data[DeviceID.PAD3] = new int[(int)PadButtonID.length];
+            data[DeviceID.PAD4] = new int[(int)PadButtonID.length];
+            data[DeviceID.KEY] = new int[256];
         }
 
         
@@ -121,11 +121,11 @@ namespace BTB01
             for (int i = 0; i < 4; i++)
             {
                 // 入力状態を取得するデバイスを指定
-                InputID device = InputID.KEY;
-                if (i == 0) device = InputID.PAD1;
-                else if (i == 1) device = InputID.PAD2;
-                else if (i == 2) device = InputID.PAD3;
-                else if (i == 3) device = InputID.PAD4;
+                DeviceID device = DeviceID.KEY;
+                if (i == 0) device = DeviceID.PAD1;
+                else if (i == 1) device = DeviceID.PAD2;
+                else if (i == 2) device = DeviceID.PAD3;
+                else if (i == 3) device = DeviceID.PAD4;
 
                 // 入力状態を取得
                 int state = DX.GetJoypadInputState((int)device);
@@ -181,10 +181,10 @@ namespace BTB01
         private static void updateKeyData()
         {
             // 入力状態を取得
-            for (int i = 0; i < data[InputID.KEY].Length; i++)
+            for (int i = 0; i < data[DeviceID.KEY].Length; i++)
             {
-                if (DX.CheckHitKey(i) != 0) data[InputID.KEY][i]++;
-                else data[InputID.KEY][i] = 0;
+                if (DX.CheckHitKey(i) != 0) data[DeviceID.KEY][i]++;
+                else data[DeviceID.KEY][i] = 0;
             }
         }
     }

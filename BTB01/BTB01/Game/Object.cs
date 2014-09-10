@@ -22,7 +22,7 @@ namespace BTB01.Game
         protected double vel_y;  // |
         protected double acc_x;  // 加速度
         protected double acc_y;  // |
-        private GraphicID graphic;  // 画像
+        protected GraphicID graphic;  // 画像
         protected double exRate;  // 拡縮率
         protected double angle;  // 回転角(ラジアン)
         protected Func<int> behavior;  // 毎フレーム実行する行動関数
