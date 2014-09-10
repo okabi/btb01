@@ -38,18 +38,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DxLib\DxDLL.cs" />
-    <Compile Include="System\Character.cs" />
-    <Compile Include="System\Generic.cs" />
-    <Compile Include="System\Main.cs" />
-    <Compile Include="System\Transition.cs" />
-    <Compile Include="System\UI.cs" />
-    <Compile Include="System\Object.cs" />
-    <Compile Include="System\Control.cs" />
+    <Compile Include="Game\Boss.cs" />
+    <Compile Include="Game\Character.cs" />
+    <Compile Include="Game\Enemy.cs" />
+    <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\Stage.cs" />
+    <Compile Include="Generic.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Transition.cs" />
+    <Compile Include="Game\UI.cs" />
+    <Compile Include="Game\Object.cs" />
+    <Compile Include="Game\Game.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scenes\Others\" />
-    <Folder Include="Scenes\Stages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
