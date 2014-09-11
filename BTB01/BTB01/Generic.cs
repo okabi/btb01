@@ -204,9 +204,11 @@ namespace BTB01
         static Graphic()
         {
             data = new Dictionary<GraphicID, int[]>();
+            // ↓テスト用
             data[GraphicID.PLAYER] = new int[1];
-            // ここから～～
+            DX.SetTransColor(0, 0, 0);
             data[GraphicID.PLAYER][0] = DX.LoadGraph("data/img/player0.png");
+            // ↑テスト用
         }
     }
 

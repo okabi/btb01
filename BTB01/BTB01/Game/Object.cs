@@ -70,7 +70,7 @@ namespace BTB01.Game
          */ 
         public void draw()
         {
-            DX.DrawRotaGraphF((float)pos_x, (float)pos_y, exRate, angle, Graphic.data[graphic][animation], DX.FALSE);
+            DX.DrawRotaGraphF((float)pos_x, (float)pos_y, exRate, angle, Graphic.data[graphic][animation], DX.TRUE);
         }
     }
 }

@@ -20,21 +20,44 @@ namespace BTB01
          */ 
         public static void Main()
         {
+            load();
+            mainLoop();
+            end();
+        }
+
+
+
+        /**
+         * プログラム全体のロード
+         */
+        private static void load()
+        {
             // ウィンドウモードに切り替え
             DX.ChangeWindowMode(DX.TRUE);
 
             // DXライブラリの初期化に失敗したら終了
-            if (DX.DxLib_Init() == -1)
-            {
-                return;
-            }
+            if (DX.DxLib_Init() == -1) return;
+
+            // 裏画面描画に切り替え
+            DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
             // ↓テスト用
             Transition.changeScene(Scene.GAME);
             // ↑テスト用
+        }
 
+
+
+        /**
+         * プログラムのメイン部分
+         */
+        private static void mainLoop()
+        {
             do
             {
+                // 前回描画したものを消去
+                DX.ClearDrawScreen();
+
                 // OSにメッセージを渡す
                 if (DX.ProcessMessage() == -1) break;
 
@@ -43,8 +66,19 @@ namespace BTB01
 
                 // Transitionのメイン関数を呼ぶ
                 Transition.main();
-            } while (Input.data[DeviceID.KEY][DX.KEY_INPUT_LALT] == 0 || Input.data[DeviceID.KEY][DX.KEY_INPUT_F4] == 0);
 
+                // 表画面に描画
+                DX.ScreenFlip();
+            } while (Input.data[DeviceID.KEY][DX.KEY_INPUT_LALT] == 0 || Input.data[DeviceID.KEY][DX.KEY_INPUT_F4] == 0);
+        }
+
+
+        
+        /**
+         * プログラムの終了
+         */
+        private static void end()
+        {
             // DXライブラリの終了
             DX.DxLib_End();
         }
