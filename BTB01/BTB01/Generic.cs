@@ -19,6 +19,7 @@ namespace BTB01
     public enum GraphicID
     {
         PLAYER = 0,
+        MAP_TEST
     }
 
     // BGM識別ID

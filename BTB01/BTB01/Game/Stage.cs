@@ -9,6 +9,7 @@ namespace BTB01.Game
     {
         class Map
         {
+            // ここから～～
 
         }
 
