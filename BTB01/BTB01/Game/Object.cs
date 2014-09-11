@@ -27,6 +27,11 @@ namespace BTB01.Game
         protected double exRate;  // 拡縮率
         protected double angle;  // 回転角(ラジアン)
         protected Func<int> behavior;  // 毎フレーム実行する行動関数
+        protected double max_vel_x;  // x方向最大速度(左右とも)
+        protected double max_vel_y;  // y方向最大速度(gravity_acc_yとは逆方向のみに適用)
+        protected double gravity_acc_x;  // 地形効果によるx方向加速度
+        protected double gravity_acc_y;  // 地形効果によるy方向加速度
+
 
         /**
          * コンストラクタ
@@ -49,6 +54,10 @@ namespace BTB01.Game
                         return 0;
                     };
             this.behavior = f;
+            max_vel_x = 4.0;
+            max_vel_y = 4.0;
+            gravity_acc_x = 0.0;
+            gravity_acc_y = 0.1;
         }
 
 
@@ -62,6 +71,15 @@ namespace BTB01.Game
             pos_y += vel_y;
             vel_x += acc_x;
             vel_y += acc_y;
+            if (Math.Abs(vel_x) < max_vel_x) vel_x += gravity_acc_x;
+            else
+            {
+                if (vel_x < 0.0) vel_x = (-1) * max_vel_x;
+                else vel_x = max_vel_x;
+            }
+            if (max_vel_y <= 0 && max_vel_y < vel_y) vel_y += gravity_acc_y;
+            else if (max_vel_y > 0 && vel_y < max_vel_y) vel_y += gravity_acc_y;
+            else vel_y = max_vel_y;
         }
 
 

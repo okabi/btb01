@@ -36,7 +36,6 @@ namespace BTB01.Game
         private Dictionary<PlayerButtonID, int> game_input = new Dictionary<PlayerButtonID, int>();  // ゲーム中、そのボタンが押し続けられたフレーム数
         private Dictionary<PlayerButtonID, int> menu_input = new Dictionary<PlayerButtonID, int>();  // メニュー画面やポーズ画面で、そのボタンが押し続けられたフレーム数
 
-
        /**
         * コンストラクタ
         */ 
@@ -88,12 +87,36 @@ namespace BTB01.Game
             inputWithController();
 
             // 入力に応じてキャラを動かす
-            if (game_input[PlayerButtonID.UP] > 0) this.vel_y = -1.0;
-            else if (game_input[PlayerButtonID.DOWN] > 0) this.vel_y = 1.0;
-            else this.vel_y = 0.0;
-            if (game_input[PlayerButtonID.LEFT] > 0) this.vel_x = -1.0;
-            else if (game_input[PlayerButtonID.RIGHT] > 0) this.vel_x = 1.0;
-            else this.vel_x = 0.0;
+            /*
+            if (game_input[PlayerButtonID.UP] > 0) this.acc_y = -0.2;
+            else if (game_input[PlayerButtonID.DOWN] > 0) this.acc_y = 0.2;
+            else this.acc_y = 0.0;
+            */
+            this.vel_y = 0.0;
+            if (game_input[PlayerButtonID.LEFT] > 0)
+            {
+                if (this.vel_x > (-1) * this.max_vel_x) this.acc_x = -0.1;
+                else
+                {
+                    this.vel_x = (-1) * this.max_vel_x;
+                    this.acc_x = 0.0;
+                }
+            }
+            else if (game_input[PlayerButtonID.RIGHT] > 0)
+            {
+                if (this.vel_x < this.max_vel_x) this.acc_x = 0.1;
+                else
+                {
+                    this.vel_x = this.max_vel_x;
+                    this.acc_x = 0.0;
+                }
+            }
+            else
+            {
+                if (this.vel_x > 0.0) this.acc_x = -0.1;
+                else if (this.vel_x < 0.0) this.acc_x = 0.1;
+                else this.acc_x = 0.0;
+            }
         }
 
 
