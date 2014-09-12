@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DxLibDLL;
 
 namespace BTB01.Game
 {
@@ -15,11 +16,13 @@ namespace BTB01.Game
 
 
             /**
-             * コンストラクタ
+             * コンストラクタ。ステージ番号とマップ番号を指定して読み込む。
              */ 
-            Map()
+            Map(int stage_index, int map_index)
             {
-                loadMapData();
+                string file_path = "data/stage/stage" + stage_index.ToString("D3") + "/map" + map_index.ToString("D3") + ".dat";
+                int file_handle = DX.FileRead_open(file_path);
+                DX.FileRead_close(file_handle);
                 /*
                 map = new int[size_x, size_y];
                 back = new int[size_x, size_y];
@@ -61,16 +64,6 @@ namespace BTB01.Game
                 {
                     this.front = front;
                 }
-            }
-
-
-            /**
-             * マップ番号を指定して、そのマップデータを読み込む。
-             * 例外処理入れたほうが良いな…
-             */
-            private void loadMapData()
-            {
-                // ここから～～
             }
         }
 
