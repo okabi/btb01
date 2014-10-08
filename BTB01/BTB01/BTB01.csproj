@@ -44,6 +44,9 @@
     <Compile Include="Game\Enemy.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\Stage.cs" />
+    <Compile Include="Game\StageElements\Event.cs" />
+    <Compile Include="Game\StageElements\Map.cs" />
+    <Compile Include="Game\StageElements\Unit.cs" />
     <Compile Include="Generic.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Transition.cs" />

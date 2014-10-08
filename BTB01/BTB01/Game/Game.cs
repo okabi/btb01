@@ -16,8 +16,8 @@ namespace BTB01.Game
     /// <summary>座標定数</summary>
     public enum Pos
     {
-        CENTER_X = 240,
-        CENTER_Y = 320
+        CENTER_X = 320,
+        CENTER_Y = 240
     }
 
     /// <summary>キャラクター識別ID</summary>
@@ -57,17 +57,23 @@ namespace BTB01.Game
         private static List<Player> player = new List<Player>();
         private static List<Object> obj = new List<Object>();
         private static List<UI> ui = new List<UI>();
+        /// <summary>描画の際にプラスするX座標</summary>
+        public static double CameraX { get; private set; }
+        /// <summary>描画の際にプラスするY座標</summary>
+        public static double CameraY { get; private set; }
 
 
-        /**
-         * コンストラクタ
-         */
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
         static Game()
         {
             // ↓テスト用
             Player item = new Player(GraphicID.PLAYER, DeviceID.KEY);
             player.Add(item);
             // ↑テスト用
+            CameraX = 0.0;
+            CameraY = 0.0;
         }
 
 
@@ -130,11 +136,14 @@ namespace BTB01.Game
         }
 
 
-        /**
-         *  画面遷移関数が呼び出す部分
-         */
+        /// <summary>
+        /// 画面遷移関数が呼び出す部分。
+        /// </summary>
         public static void main()
         {
+            // カメラ処理
+            camera();
+
             // オブジェクト等の行動処理
             move();
 
@@ -143,9 +152,9 @@ namespace BTB01.Game
         }
 
 
-        /**
-         * オブジェクト等の行動処理
-         */
+        /// <summary>
+        /// オブジェクト等の行動処理。
+        /// </summary>
         private static void move()
         {
             foreach (Player p in player)
@@ -154,10 +163,10 @@ namespace BTB01.Game
             }
         }
 
-
-        /**
-         * オブジェクト等の描画処理
-         */
+        
+        /// <summary>
+        /// オブジェクト等の描画処理。
+        /// </summary>
         private static void draw()
         {
             foreach (Player p in player)
@@ -167,9 +176,20 @@ namespace BTB01.Game
         }
 
 
-        /**
-         * 当たり判定の処理
-         */ 
+        /// <summary>
+        /// カメラを制御する。とりあえず今のところ、プレイヤー1の座標にカメラを合わせる。
+        /// </summary>
+        private static void camera()
+        {
+            Player first_player = player.First<Player>();
+            CameraX = (double)Pos.CENTER_X - first_player.PosX;
+            CameraY = (double)Pos.CENTER_Y - first_player.PosY;
+        }
+
+
+        /// <summary>
+        /// 当たり判定の処理。
+        /// </summary>
         public static class Collision
         {
             /* 四角形と四角形の当たり判定（位置補正無し）

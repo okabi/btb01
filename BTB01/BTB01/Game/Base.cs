@@ -50,7 +50,7 @@ namespace BTB01.Game
         /// </summary>
         public void draw()
         {
-            DX.DrawRotaGraphF((float)PosX, (float)PosY, ExRate, Angle, BTB01.Graphic.data[this.Graphic][Animation], DX.TRUE);
+            DX.DrawRotaGraphF((float)PosX + (float)Game.CameraX, (float)PosY + (float)Game.CameraY, ExRate, Angle, BTB01.Graphic.data[this.Graphic][Animation], DX.TRUE);
         }
 
     }
