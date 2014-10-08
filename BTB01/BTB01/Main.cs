@@ -42,7 +42,7 @@ namespace BTB01
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
             // ↓テスト用
-            Transition.changeScene(Scene.GAME);
+            Transition.changeScene(SceneID.GAME);
             // ↑テスト用
         }
 

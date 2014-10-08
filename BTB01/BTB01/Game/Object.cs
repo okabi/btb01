@@ -2,8 +2,9 @@
  * Object.cs
  *   概要：
  *     このクラスは、オブジェクトを定義します。
- *     オブジェクトの定義は「画面上に存在する、１つのグラフィックを持つ個体」です。
+ *     オブジェクトの定義は「画面上に存在する、動き(振る舞い)を持つ個体」です。
  *     オブジェクトは当たり判定を持ちません。当たり判定を持つオブジェクトはキャラクターと定義します。
+ *     Baseを基底クラスとします。
  */
 
 using System;
@@ -14,81 +15,80 @@ using DxLibDLL;
 
 namespace BTB01.Game
 {
-    class Object
+    /// <summary>画面上に存在する、動き(振る舞い)を持つ個体。当たり判定を持たない。Baseを継承。</summary>
+    class Object : Base
     {
-        protected double pos_x;  // 中心座標
-        protected double pos_y;  // |
-        protected double vel_x;  // 速度
-        protected double vel_y;  // |
-        protected double acc_x;  // 加速度
-        protected double acc_y;  // |
-        protected GraphicID graphic;  // 画像
-        protected int animation;  // 表示アニメーション番号(歩行アニメーションなど)
-        protected double exRate;  // 拡縮率
-        protected double angle;  // 回転角(ラジアン)
-        protected Func<int> behavior;  // 毎フレーム実行する行動関数
-        protected double max_vel_x;  // x方向最大速度(左右とも)
-        protected double max_vel_y;  // y方向最大速度(gravity_acc_yとは逆方向のみに適用)
-        protected double gravity_acc_x;  // 地形効果によるx方向加速度
-        protected double gravity_acc_y;  // 地形効果によるy方向加速度
+        /// <summary>X速度</summary>
+        public double VelX { get; protected set; }
+        /// <summary>Y速度</summary>
+        public double VelY { get; protected set; }
+        /// <summary>X加速度</summary>
+        public double AccX { get; protected set; }
+        /// <summary>Y加速度</summary>
+        public double AccY { get; protected set; }
+        /// <summary>毎フレーム実行する行動関数</summary>
+        protected Func<int> behavior;
+        /// <summary>X最大速度(左右とも)</summary>
+        public double MaxVelX { get; protected set; }
+        /// <summary>Y最大速度(重力加速度とは逆方向のみに適用)</summary>
+        public double MaxVelY { get; protected set; }
+        /// <summary>地形効果によるX加速度</summary>
+        public double GravityAccX { get; protected set; }
+        /// <summary>地形効果によるY加速度</summary>
+        public double GravityAccY { get; protected set; }
 
-
-        /**
-         * コンストラクタ
-         */ 
-        public Object(GraphicID graphic)
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
+        /// <param name="graphic">グラフィックID</param>
+        public Object(GraphicID graphic) : base(graphic)
         {
-            pos_x = (double)Pos.CENTER_X;
-            pos_y = (double)Pos.CENTER_Y;
-            vel_x = 0.0;
-            vel_y = 0.0;
-            acc_x = 0.0;
-            acc_y = 0.0;
-            this.graphic = graphic;
-            animation = 0;
-            exRate = 1.0;
-            angle = 0.0;
+            VelX = 0.0;
+            VelY = 0.0;
+            AccX = 0.0;
+            AccY = 0.0;
             Func<int> f = 
                 () => 
                     {
                         return 0;
                     };
-            this.behavior = f;
-            max_vel_x = 4.0;
-            max_vel_y = 4.0;
-            gravity_acc_x = 0.0;
-            gravity_acc_y = 0.1;
+            behavior = f;
+            MaxVelX = 4.0;
+            MaxVelY = 4.0;
+            GravityAccX = 0.0;
+            GravityAccY = 0.1;
         }
 
 
-        /**
-         * 毎フレームの座標操作等
-         */
+        /// <summary>
+        /// 振る舞い関数を呼びそれに従って、座標を動かす。毎フレーム呼ぶこと。
+        /// </summary>
         public void move()
         {
             behavior();
-            pos_x += vel_x;
-            pos_y += vel_y;
-            vel_x += acc_x;
-            vel_y += acc_y;
-            if (Math.Abs(vel_x) < max_vel_x) vel_x += gravity_acc_x;
+            PosX += VelX;
+            PosY += VelY;
+            VelX += AccX;
+            VelY += AccY;
+            if (Math.Abs(VelX) < MaxVelX) VelX += GravityAccX;
             else
             {
-                if (vel_x < 0.0) vel_x = (-1) * max_vel_x;
-                else vel_x = max_vel_x;
+                if (VelX < 0.0) VelX = (-1) * MaxVelX;
+                else VelX = MaxVelX;
             }
-            if (max_vel_y <= 0 && max_vel_y < vel_y) vel_y += gravity_acc_y;
-            else if (max_vel_y > 0 && vel_y < max_vel_y) vel_y += gravity_acc_y;
-            else vel_y = max_vel_y;
+            if (MaxVelY <= 0 && MaxVelY < VelY) VelY += GravityAccY;
+            else if (MaxVelY > 0 && VelY < MaxVelY) VelY += GravityAccY;
+            else VelY = MaxVelY;
         }
 
 
-        /**
-         * 毎フレームの描画
-         */ 
-        public void draw()
+        /// <summary>
+        /// 振る舞い定義。
+        /// </summary>
+        /// <param name="behavior"></param>
+        public void setBehavior(Func<int> behavior)
         {
-            DX.DrawRotaGraphF((float)pos_x, (float)pos_y, exRate, angle, Graphic.data[graphic][animation], DX.TRUE);
+            this.behavior = behavior;
         }
     }
 }

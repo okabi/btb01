@@ -13,41 +13,45 @@ using DxLibDLL;
 
 namespace BTB01
 {
-    // 画面遷移用定数
-    public enum Scene
+    /// <summary>画面遷移用定数</summary>
+    public enum SceneID
     {
         GAME = 0,
     }
 
 
+    /// <summary>画面遷移用の静的クラス。</summary>
     public static class Transition
     {
-        public static Scene scene {get; private set; }  // 現在の画面
-        private static int count;  // 現在の画面に変わってからのフレーム数
+        /// <summary>現在の画面</summary>
+        public static SceneID Scene { get; private set; }
+        /// <summary>現在の画面に変わってからのフレーム数</summary>
+        public static int Count { get; private set; }
 
-        /**
-         *  メイン関数が呼び出す部分
-         */
+        /// <summary>
+        /// メイン関数が呼び出す部分。
+        /// </summary>
         public static void main()
         {
-            switch (scene)
+            switch (Scene)
             {
-                case Scene.GAME:
+                case SceneID.GAME:
                     Game.Game.main();
                     break;
             }
-            count++;
+            Count++;
         }
 
-        /**
-         *  sceneを変更する。
-         *  @params next_scene:変更するscene
-         *  @return 成功:0
-         */ 
-        public static int changeScene(Scene next_scene)
+        
+        /// <summary>
+        /// sceneを変更する。
+        /// </summary>
+        /// <param name="next_scene">変更するscene</param>
+        /// <returns>成功->0</returns>
+        public static int changeScene(SceneID next_scene)
         {
-            scene = next_scene;
-            count = 0;
+            Scene = next_scene;
+            Count = 0;
             return 0;
         }        
     }

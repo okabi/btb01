@@ -1,7 +1,7 @@
 ﻿/*
  * Generic.cs
  *   概要：
- *     この名前空間は、汎用クラス・汎用インスタンス・汎用関数・汎用変数・汎用定数を定義します。
+ *     このファイルは、全てのSceneで使用可能な汎用クラス・汎用インスタンス・汎用関数・汎用変数・汎用定数を定義します。
  */
 
 using System;
@@ -12,29 +12,26 @@ using DxLibDLL;
 
 namespace BTB01
 {
-    /**
-     * ゲーム内汎用定数の宣言
-     */
-    // 画像識別ID
+    /// <summary>画像識別ID</summary>
     public enum GraphicID
     {
         PLAYER = 0,
         MAP_TEST
     }
 
-    // BGM識別ID
+    /// <summary>BGM識別ID</summary>
     public enum BgmID
     {
         TEST = 0,
     }
 
-    // 効果音識別ID
+    /// <summary>効果音識別ID</summary>
     public enum SoundEffectID
     {
         TEST = 0,
     }
 
-    // 入力デバイス定数
+    /// <summary>入力デバイスID</summary>
     public enum DeviceID
     {
         PAD1 = DX.DX_INPUT_PAD1,
@@ -44,7 +41,7 @@ namespace BTB01
         KEY = DX.DX_INPUT_KEY
     }
 
-    // パッド入力定数
+    /// <summary>パッド入力定数</summary>
     public enum PadButtonID
     {
         UP = 0,
@@ -83,17 +80,15 @@ namespace BTB01
     }
 
 
-    /**
-     *  入力関連クラス
-     */
+    /// <summary>入力関連クラス</summary>
     public static class Input
     {
-        // 各入力デバイスの各ボタンが押され続けたフレーム数
+        /// <summary>各入力デバイスの各ボタンが押され続けたフレーム数</summary
         public static Dictionary<DeviceID, int[]> data { get; private set; }
 
-        /**
-         * コンストラクタ
-         */ 
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
         static Input()
         {
             data = new Dictionary<DeviceID, int[]>();
@@ -105,9 +100,9 @@ namespace BTB01
         }
 
         
-        /**
-         * 入力状態の取得。毎フレーム実行される。
-         */
+        /// <summary>
+        /// 入力状態の取得。毎フレーム実行する。
+        /// </summary>
         public static void main()
         {
             updatePadData();
@@ -115,9 +110,9 @@ namespace BTB01
         }
         
 
-        /**
-         * パッド入力状態の取得と内部データの更新
-         */
+        /// <summary>
+        /// パッド入力状態の取得と内部データの更新。
+        /// </summary>
         private static void updatePadData()
         {
             for (int i = 0; i < 4; i++)
@@ -177,9 +172,9 @@ namespace BTB01
         }
 
 
-        /**
-         * キーボード入力状態の取得と内部データの更新
-         */
+        /// <summary>
+        /// キーボード入力状態の取得と内部データの更新。
+        /// </summary>
         private static void updateKeyData()
         {
             // 入力状態を取得
@@ -192,16 +187,14 @@ namespace BTB01
     }
 
 
-    /**
-      * 画像統合クラス
-      */
+    /// <summary>画像統合クラス。</summary>
     public static class Graphic
     {
         public static Dictionary<GraphicID, int[]> data { get; private set; }  // 画像データ(連想配列)
         
-        /**
-         * コンストラクタ
-         */ 
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
         static Graphic()
         {
             data = new Dictionary<GraphicID, int[]>();
@@ -214,17 +207,17 @@ namespace BTB01
     }
 
     
-    /**
-      * 音楽統合クラス
-      */
+    /// <summary>
+    /// 音楽統合クラス。
+    /// </summary>
     public static class Sound
     {
         public static Dictionary<BgmID, int> bgm { get; private set; }  // BGMデータ(連想配列)
         public static Dictionary<SoundEffectID, int> sound_effect { get; private set; }  // 効果音データ(連想配列)
 
-        /**
-         * コンストラクタ
-         */
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
         static Sound()
         {
             bgm = new Dictionary<BgmID, int>();

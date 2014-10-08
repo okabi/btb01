@@ -13,23 +13,20 @@ using DxLibDLL;
 
 namespace BTB01.Game
 {
-    /**
-     * ゲーム内汎用定数の宣言
-     */    
-    // 座標定数
+    /// <summary>座標定数</summary>
     public enum Pos
     {
         CENTER_X = 240,
         CENTER_Y = 320
     }
-    
-    // キャラクター識別ID
+
+    /// <summary>キャラクター識別ID</summary>
     public enum CharacterID
     {
         PLAYER = 0,
     }
-    
-    // （位置補正が必要な）当たり判定の位置。キャラクターのどの位置に存在する当たり判定か
+
+    /// <summary>（位置補正が必要な）当たり判定の位置。キャラクターのどの位置に存在する当たり判定か</summary>
     public enum CollisionPart
     {
         UPPER,
@@ -38,22 +35,25 @@ namespace BTB01.Game
         RIGHT
     }
 
-    // 当たり判定タイプ。それぞれを足しあわせて決定する（OR演算）
+    /// <summary>当たり判定タイプ。それぞれを足しあわせて決定する（OR演算）</summary>
     public enum CollisionType
     {
-        OBJECT = 0x0,   // マップなど通り抜けられないモノ。ATTACK,PENETRATE属性が無いモノは全て妨害対象
-        PLAYER = 0x1,   // ENEMYからダメージを受け、ENEMYにダメージを与える
-        ENEMY = 0x2,    // PLAYERからダメージを受け、PLAYERにダメージを与える 
-        ATTACK = 0x4,   // OBJECTからダメージを受ける(PENETRATEが無い場合)
-        PENETRATE = 0x8 // OBJECTを貫通する
+        /// <summary>マップなど通り抜けられないモノ。ATTACK,PENETRATE属性が無いモノは全て妨害対象</summary>
+        OBJECT = 0x0,
+        /// <summary>ENEMYからダメージを受け、ENEMYにダメージを与える</summary>
+        PLAYER = 0x1,
+        /// <summary>PLAYERからダメージを受け、PLAYERにダメージを与える </summary>
+        ENEMY = 0x2,
+        /// <summary>OBJECTからダメージを受ける(PENETRATEが無い場合)</summary>
+        ATTACK = 0x4,
+        /// <summary>OBJECTを貫通する</summary>
+        PENETRATE = 0x8
     }
 
 
+    /// <summary>ゲーム本体を統合する静的クラス。</summary>
     public static class Game
     {
-        /**
-         * ゲーム内汎用インスタンスの宣言
-         */
         private static List<Player> player = new List<Player>();
         private static List<Object> obj = new List<Object>();
         private static List<UI> ui = new List<UI>();

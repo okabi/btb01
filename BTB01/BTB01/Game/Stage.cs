@@ -6,6 +6,7 @@ using DxLibDLL;
 
 namespace BTB01.Game
 {
+    /// <summary>１つのスタート地点と１つのゴールを持つステージ。</summary>
     class Stage
     {
         class Map
@@ -63,7 +64,7 @@ namespace BTB01.Game
                         string[] st_array = st.ToString().Split(',');
                         for (int j = 0; j < st_array.Length; j++)
                         {
-                            back[j, i - 6] = int.Parse(st_array[j]);
+                            back[j, i - 6 - size_y] = int.Parse(st_array[j]);
                         }
                     }
                     else if (i >= 6 + 2 * size_y && i < 6 + 3 * size_y)
@@ -71,7 +72,7 @@ namespace BTB01.Game
                         string[] st_array = st.ToString().Split(',');
                         for (int j = 0; j < st_array.Length; j++)
                         {
-                            front[j, i - 6] = int.Parse(st_array[j]);
+                            front[j, i - 6 - 2 * size_y] = int.Parse(st_array[j]);
                         }
                     }
                 }

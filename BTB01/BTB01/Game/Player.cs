@@ -14,7 +14,7 @@ using DxLibDLL;
 
 namespace BTB01.Game
 {
-    // プレイヤーの入力ボタン
+    /// <summary>プレイヤーの入力(ジャンプ、攻撃など)</summary>
     public enum PlayerButtonID
     {
         UP,
@@ -26,19 +26,28 @@ namespace BTB01.Game
         PAUSE
     }
 
-    
+
+    /// <summary>プレイヤー。Characterを継承。</summary>
     class Player : Character
     {
-        private DeviceID device;  // 入力デバイス
-        private bool key_use;  // キーボードの併用を認めるか
-        private Dictionary<PlayerButtonID, PadButtonID> pad = new Dictionary<PlayerButtonID, PadButtonID>();  // それぞれの機能がどのパッドボタンに対応するか
-        private Dictionary<PlayerButtonID, int> key = new Dictionary<PlayerButtonID, int>();  // それぞれの機能がどのキーに対応するか
-        private Dictionary<PlayerButtonID, int> game_input = new Dictionary<PlayerButtonID, int>();  // ゲーム中、そのボタンが押し続けられたフレーム数
-        private Dictionary<PlayerButtonID, int> menu_input = new Dictionary<PlayerButtonID, int>();  // メニュー画面やポーズ画面で、そのボタンが押し続けられたフレーム数
+        /// <summary>入力デバイス</summary>
+        private DeviceID device;
+        /// <summary>キーボードの併用を認めるか？</summary>
+        private bool key_use;
+        /// <summary>ジャンプや攻撃などがどのパッドボタンに対応するか</summary>
+        private Dictionary<PlayerButtonID, PadButtonID> pad = new Dictionary<PlayerButtonID, PadButtonID>();
+        /// <summary>ジャンプや攻撃などがどのキーに対応するか</summary>
+        private Dictionary<PlayerButtonID, int> key = new Dictionary<PlayerButtonID, int>();
+        /// <summary>ゲーム中、ジャンプや攻撃などが押し続けられたフレーム数</summary>
+        private Dictionary<PlayerButtonID, int> game_input = new Dictionary<PlayerButtonID, int>();
+        /// <summary>メニュー画面やポーズ画面で、決定やキャンセルなどが押し続けられたフレーム数</summary>
+        private Dictionary<PlayerButtonID, int> menu_input = new Dictionary<PlayerButtonID, int>();
 
-       /**
-        * コンストラクタ
-        */ 
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
+        /// <param name="graphic">グラフィックID</param>
+        /// <param name="device">入力デバイスID</param>
         public Player(GraphicID graphic, DeviceID device) : base(graphic, CharacterID.PLAYER)
         {
             this.device = device;
@@ -78,9 +87,9 @@ namespace BTB01.Game
         }
 
 
-        /**
-         * プレイヤーの操作(ゲーム中)
-         */
+        /// <summary>
+        /// プレイヤー操作(ゲーム中)
+        /// </summary>
         private void controlInGame()
         {
             // 入力デバイスからの入力を受け取る
@@ -92,37 +101,37 @@ namespace BTB01.Game
             else if (game_input[PlayerButtonID.DOWN] > 0) this.acc_y = 0.2;
             else this.acc_y = 0.0;
             */
-            this.vel_y = 0.0;
+            this.VelY = 0.0;
             if (game_input[PlayerButtonID.LEFT] > 0)
             {
-                if (this.vel_x > (-1) * this.max_vel_x) this.acc_x = -0.1;
+                if (this.VelX > (-1) * this.MaxVelX) this.AccX = -0.1;
                 else
                 {
-                    this.vel_x = (-1) * this.max_vel_x;
-                    this.acc_x = 0.0;
+                    this.VelX = (-1) * this.MaxVelX;
+                    this.AccX = 0.0;
                 }
             }
             else if (game_input[PlayerButtonID.RIGHT] > 0)
             {
-                if (this.vel_x < this.max_vel_x) this.acc_x = 0.1;
+                if (this.VelX < this.MaxVelX) this.AccX = 0.1;
                 else
                 {
-                    this.vel_x = this.max_vel_x;
-                    this.acc_x = 0.0;
+                    this.VelX = this.MaxVelX;
+                    this.AccX = 0.0;
                 }
             }
             else
             {
-                if (this.vel_x > 0.0) this.acc_x = -0.1;
-                else if (this.vel_x < 0.0) this.acc_x = 0.1;
-                else this.acc_x = 0.0;
+                if (this.VelX > 0.0) this.AccX = -0.1;
+                else if (this.VelX < 0.0) this.AccX = 0.1;
+                else this.AccX = 0.0;
             }
         }
 
 
-        /**
-         * プレイヤー入力
-         */
+        /// <summary>
+        /// プレイヤー入力を読み込む
+        /// </summary>
         private void inputWithController()
         {
             foreach (PlayerButtonID button in Enum.GetValues(typeof(PlayerButtonID)))
