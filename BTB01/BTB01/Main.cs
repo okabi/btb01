@@ -41,6 +41,9 @@ namespace BTB01
             // 裏画面描画に切り替え
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
+            // ゲーム全体の初期化
+            Transition.load();
+
             // ↓テスト用
             Transition.changeScene(SceneID.GAME);
             // ↑テスト用

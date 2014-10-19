@@ -19,7 +19,6 @@ namespace BTB01
         GAME = 0,
     }
 
-
     /// <summary>画面遷移用の静的クラス。</summary>
     public static class Transition
     {
@@ -28,6 +27,14 @@ namespace BTB01
         /// <summary>現在の画面に変わってからのフレーム数</summary>
         public static int Count { get; private set; }
 
+        /// <summary>
+        /// ゲーム全体の初期化。
+        /// </summary>
+        public static void load()
+        {
+            Game.Game.load();
+        }
+        
         /// <summary>
         /// メイン関数が呼び出す部分。
         /// </summary>

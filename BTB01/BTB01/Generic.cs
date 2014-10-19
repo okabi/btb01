@@ -17,7 +17,7 @@ namespace BTB01
     public enum GraphicID
     {
         PLAYER = 0,
-        MAP_TEST
+        MAPCHIP000
     }
 
     /// <summary>BGM識別ID</summary>
@@ -203,6 +203,8 @@ namespace BTB01
             data[GraphicID.PLAYER] = new int[1];
             DX.SetTransColor(0, 0, 0);
             data[GraphicID.PLAYER][0] = DX.LoadGraph("data/img/player0.png");
+            data[GraphicID.MAPCHIP000] = new int[64];
+            DX.LoadDivGraph("data/img/mapchip000.png", 64, 8, 8, 32, 32, out data[GraphicID.MAPCHIP000][0]);
             // ↑テスト用
         }
     }

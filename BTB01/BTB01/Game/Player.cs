@@ -74,6 +74,8 @@ namespace BTB01.Game
             key[PlayerButtonID.JUMP] = DX.KEY_INPUT_Z;
             key[PlayerButtonID.SHOT] = DX.KEY_INPUT_X;
             key[PlayerButtonID.PAUSE] = DX.KEY_INPUT_ESCAPE;
+            PosX = 32;
+            PosY = -32;
             // ↑試験的にデバイス・ボタン割り当てを行う
             // ↓プレイヤー特有の動作処理
             Func<int> f = 

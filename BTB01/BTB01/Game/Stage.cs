@@ -44,9 +44,9 @@ namespace BTB01.Game
         private void readInfo(int id)
         {
             // ファイルオープン
-            string file_path = "data/stage/" + id.ToString().PadLeft(3, '0') + ".dat";
+            string file_path = "data/stage/" + id.ToString().PadLeft(3, '0') + "/info.txt";
             int file_handle = DX.FileRead_open(file_path);
- 
+
             // 1行読み込む
             StringBuilder command = new StringBuilder(256);
             while (DX.FileRead_gets(command, command.Capacity, file_handle) != -1)
@@ -54,7 +54,7 @@ namespace BTB01.Game
                 // commandに命令文字列が入る。
                 if (command[0] != '#')
                 {
-                    char[] delimiters = { '=' };
+                    char[] delimiters = { ' ', '=' };
                     // commandsに{"変数名", "値"}形式の配列が入る。
                     string[] commands = command.ToString().Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
                     switch (commands[0])

@@ -28,7 +28,7 @@ namespace BTB01.Game.StageElements
         public Map(int stage_index, int map_index)
         {
             // ファイルを開く
-            string file_path = "data/stage/stage" + stage_index.ToString("D3") + "/map" + map_index.ToString("D3") + ".dat";
+            string file_path = "data/stage/" + stage_index.ToString().PadLeft(3, '0') + "/map" + map_index.ToString().PadLeft(3, '0') + ".dat";
             int file_handle = DX.FileRead_open(file_path);
 
             // 必要な変数の宣言
@@ -60,7 +60,8 @@ namespace BTB01.Game.StageElements
                     string[] st_array = st.ToString().Split(',');
                     for (int j = 0; j < st_array.Length; j++)
                     {
-                        map[j, i - 6] = new MapChip((GraphicID)Enum.ToObject(typeof(GraphicID), map_set), int.Parse(st_array[j]));
+                        int y = i - 6;
+                        map[j, y] = new MapChip((GraphicID)Enum.Parse(typeof(GraphicID), "MAPCHIP" + map_set.ToString().PadLeft(3, '0')), int.Parse(st_array[j]), j, y);
                     }
                 }
                 else if (i >= 6 + size_y && i < 6 + 2 * size_y)
@@ -68,7 +69,8 @@ namespace BTB01.Game.StageElements
                     string[] st_array = st.ToString().Split(',');
                     for (int j = 0; j < st_array.Length; j++)
                     {
-                        back[j, i - 6 - size_y] = new MapChip((GraphicID)Enum.ToObject(typeof(GraphicID), back_set), int.Parse(st_array[j]));
+                        int y = i - 6 - size_y;
+                        back[j, y] = new MapChip((GraphicID)Enum.Parse(typeof(GraphicID), "MAPCHIP" + map_set.ToString().PadLeft(3, '0')), int.Parse(st_array[j]), j, y);
                     }
                 }
                 else if (i >= 6 + 2 * size_y && i < 6 + 3 * size_y)
@@ -76,7 +78,8 @@ namespace BTB01.Game.StageElements
                     string[] st_array = st.ToString().Split(',');
                     for (int j = 0; j < st_array.Length; j++)
                     {
-                        front[j, i - 6 - 2 * size_y] = new MapChip((GraphicID)Enum.ToObject(typeof(GraphicID), front_set), int.Parse(st_array[j]));
+                        int y = i - 6 - 2 * size_y;
+                        front[j, i - 6 - 2 * size_y] = new MapChip((GraphicID)Enum.Parse(typeof(GraphicID), "MAPCHIP" + map_set.ToString().PadLeft(3, '0')), int.Parse(st_array[j]), j, y);
                     }
                 }
             }

@@ -54,9 +54,10 @@ namespace BTB01.Game
     /// <summary>ゲーム本体を統合する静的クラス。</summary>
     public static class Game
     {
-        private static List<Player> player = new List<Player>();
-        private static List<Object> obj = new List<Object>();
-        private static List<UI> ui = new List<UI>();
+        /// <summary>ゲーム上のプレイヤー本体</summary>
+        private static List<Player> player;
+        /// <summary>ゲーム上のステージ本体</summary>
+        private static Stage stage;
         /// <summary>描画の際にプラスするX座標</summary>
         public static double CameraX { get; private set; }
         /// <summary>描画の際にプラスするY座標</summary>
@@ -64,13 +65,15 @@ namespace BTB01.Game
 
 
         /// <summary>
-        /// コンストラクタ。
+        /// ゲームの初期化。
         /// </summary>
-        static Game()
+        public static void load()
         {
+            player = new List<Player>();
             // ↓テスト用
             Player item = new Player(GraphicID.PLAYER, DeviceID.KEY);
             player.Add(item);
+            stage = new Stage(0);
             // ↑テスト用
             CameraX = 0.0;
             CameraY = 0.0;
@@ -169,9 +172,21 @@ namespace BTB01.Game
         /// </summary>
         private static void draw()
         {
+            if (stage != null)
+            {
+                stage.drawBack();
+            }
             foreach (Player p in player)
             {
                 p.draw();
+            }
+            if (stage != null)
+            {
+                stage.drawMap();
+            }
+            if (stage != null)
+            {
+                stage.drawFront();
             }
         }
 
