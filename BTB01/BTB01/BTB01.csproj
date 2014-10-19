@@ -46,6 +46,7 @@
     <Compile Include="Game\Stage.cs" />
     <Compile Include="Game\StageElements\Event.cs" />
     <Compile Include="Game\StageElements\Map.cs" />
+    <Compile Include="Game\StageElements\MapElements\MapChip.cs" />
     <Compile Include="Game\StageElements\Unit.cs" />
     <Compile Include="Generic.cs" />
     <Compile Include="Main.cs" />
